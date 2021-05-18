@@ -4,11 +4,11 @@ var ResponseService = /** @class */ (function () {
     function ResponseService() {
     }
     ResponseService.prototype.doFailureAction = function (error) {
-        return error;
+        return Promise.reject(error);
     };
     ;
     ResponseService.prototype.doSuccessAction = function (response) {
-        return (response === null || response === void 0 ? void 0 : response.data) || {};
+        return response.data || {};
     };
     ;
     ResponseService.prototype.processResponse = function (promise) {

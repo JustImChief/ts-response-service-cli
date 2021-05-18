@@ -3,13 +3,13 @@ import { AxiosResponse } from 'axios';
 
 import { default as ResponseServiceError } from './ResponseServiceError';
 
-class ResponseService<E = ResponseServiceError, R = AxiosResponse> {
-  doFailureAction(error: Promise<E>): Promise<E> {
-    return error;
+class ResponseService {
+  doFailureAction<T = ResponseServiceError>(error: T): Promise<T> {
+    return Promise.reject(error);
   };
 
-  doSuccessAction(response): Promise<R> {
-    return response?.data || {};
+  doSuccessAction(response: AxiosResponse<any>): any {
+    return response.data || {};
   };
 
   processResponse(promise: Promise<AxiosResponse<any>>): Promise<AxiosResponse<any>> {
